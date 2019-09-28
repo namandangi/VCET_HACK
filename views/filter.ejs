@@ -1,0 +1,102 @@
+
+<% include ./partials/header %>
+<form action="/s" method="GET">
+   <div style="background-color: #116466">
+      
+   <div>
+   <hr>
+   <div class="alert alert-primary col-md-offset-1 col-md-4" style="background-color:#D9B08C">
+   <center>Degree
+   <select name="Degree">
+   <option>Select</option>
+   <option value="Undergraduate">Undergraduate</option>
+   <option value="Postgraduate">Postgraduate</option>
+   <option value="PhD">PhD</option>
+   </select>
+   </center>
+   </div>
+  
+  
+   <div class="alert alert-primary col-md-offset-2 col-md-4" style="background-color:#D9B08C">
+   <center>Gender
+   <select name="Gender">
+   <option>Select</option>
+   <option value="Male">Male</option>
+   <option value="Female">Female</option>
+   <option value="Other">Other</option>
+   </select>
+   </center>
+   </div>
+  
+</div>
+
+
+   <div>
+
+   <div class="alert alert-primary col-md-offset-1 col-md-4" style="background-color:#D9B08C">
+   <center>Scholarship
+   <select name="Scholarship">
+   <option>Select</option>
+   <option value="means">Means Based Scholarship</option>
+   <option value="merit">Merit Based Scholarship</option>
+   <option value="need">Need Based Scholarship</option>
+   <option value="international">International Scholarship</option>
+   </select>
+   </center>
+   </div>
+  
+   <div  class="alert alert-primary col-md-offset-2 col-md-4" style="background-color:#D9B08C">
+   <center>Country
+   <select name="Country">
+   <option>Select</option>
+   <option value="National">National</option>
+   <option value="International">International</option>
+   </select>
+   </center>
+   </div>
+  
+</div>
+<div class="col-xs-12">
+<center><input class="button" type="Submit"></center>
+<br>
+
+<hr>
+</div>
+</div>
+</form>
+
+<% scholarshipData.forEach((data)=>{  %>  
+   <div class="rows">
+           <div class=" col-xs-offset-1 col-xs-10">
+             <div class="card blue-grey darken-1"><center>
+               <div class="card-content white-text">
+               <h3> <span class="card-title"><%= data.scholarshipName %>
+                   </span></h3>
+               <b>  <h4>This Scholarship is provided By : </h4></b>
+                 <p><%=data.scholarshipProvider%></p>
+               <div class="card-action">
+              <b>   <h4>Who can apply</h4></b>
+                 <ul>
+                 <% data.whoCanApply.forEach((who)=>{ %>
+                   <li><%=who%></li>
+                   <%});%>
+                 </ul>
+                <b> <h4>What are the benefits</h4></b>
+                   <% data.benefits.forEach((benefit)=>{%>
+                     <ul><li><%=benefit%></li></ul>
+                     <%});%>
+                 <a href="<%=data.portalLink%>">APPLY NOW</a>
+                 <%if(currentUser!=null){%>
+                 <a href='/profile/<%=currentUser._id %>''>Save</a>
+                 <%}%>
+               </div></center></div>
+             </div>
+           </div>
+         </div>
+       <%});%>
+
+
+
+
+
+        <% include ./partials/footer %> 
